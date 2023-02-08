@@ -1,6 +1,9 @@
 # depslib dependency file v1.0
-1675617771 source:d:\projects\test_projects\test_two\imain.cpp
+1675863011 source:d:\projects\test_projects\test_two\imain.cpp
 	"iGraphics.h"
+	<math.h>
+	<stdlib.h>
+	<string.h>
 
 1675507706 d:\projects\test_projects\test_two\igraphics.h
 	<stdio.h>
