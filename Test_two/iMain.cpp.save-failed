@@ -9,16 +9,14 @@
 // 3 for profile homepage
 
 /////////////////////////////////// FILE VARIABLES ////////
-FILE *username_input_file=fopen("Files/username_input_file.txt","a+");
-FILE *mobile_input_file=fopen("Files/mobile_input_file.txt","a+");
-FILE *institution_input_file=fopen("Files/institution_input_file.txt","a+");
-FILE *class_input_file=fopen("Files/class_input_file.txt","a+");
-FILE *password_input_file=fopen("Files/password_input_file.txt","a+");
+FILE *username_input_file=fopen("Files\\username_input_file.txt","a+");
+FILE *mobile_input_file=fopen("Files\\mobile_input_file.txt","a+");
+FILE *institution_input_file=fopen("Files\\institution_input_file.txt","a+");
+FILE *class_input_file=fopen("Files\\class_input_file.txt","a+");
+FILE *password_input_file=fopen("Files\\password_input_file.txt","a+");
 
-FILE *username_checker_file=fopen("Files/username_input_file.txt","r");
-FILE *password_checker_file=fopen("Files/password_input_file.txt","r");
-
-FILE *class_code_file=fopen("Files/class_input.txt","a+");
+FILE *username_checker_file=fopen("Files\\username_input_file.txt","r");
+FILE *password_checker_file=fopen("Files\\password_input_file.txt","r");
 /////////////////////////////////// MENU VARIABLES /////////
 int showtext=0;
 int width=750,lenth=1300;
@@ -56,13 +54,13 @@ void home_mouse(int mx,int my)
 {
     if(my>=300 && my<=550 && mx>=200 && mx<=370)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         gamestate=1;
 
     }
     if(my>=300 && my<=550 && mx>=390 && mx<=550)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         gamestate=2;
 
     }
@@ -103,24 +101,24 @@ void login_mouse(int mx,int my)
 {
     if(my>=650 && my<=750 && mx>=00 && mx<=120)
     {
-        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
         gamestate=0;
 
     }
     if(my>=0 && my<=100 && mx>=00 && mx<=120)
     {
-        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
         showtext=1;
 
     }
     if(mx>=585 && mx<=900 && my>=382 && my<=420)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         login_substate=1;
     }
     if(mx>=585 && mx<=900 && my>=330 && my<=380)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         login_substate=2;
     }
 }
@@ -128,39 +126,39 @@ void cna_mouse(int mx,int my)
 {
     if(my>=650 && my<=750 && mx>=00 && mx<=120)
     {
-        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
         gamestate=0;
 
     }
     if(my>=0 && my<=100 && mx>=00 && mx<=120)
     {
-        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
         showtext=1;
 
     }
     if(mx>=345 && mx<=600 && my>=520 && my<=560)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         cna_substate=1;
     }
     if(mx>=345 && mx<=600 && my>=480 && my<=520)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         cna_substate=2;
     }
     if(mx>=345 && mx<=600 && my>=440 && my<=480)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         cna_substate=3;
     }
     if(mx>=345 && mx<=600 && my>=400 && my<=440)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         cna_substate=4;
     }
     if(mx>=345 && mx<=600 && my>=300 && my<=350)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         cna_substate=5;
     }
 }
@@ -218,7 +216,7 @@ void verify_files(int login_substate,int key)
 {
     if(key==13)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         username[index_username_login]='\0';
         password[index_password_login]='\0';
         //printf("%s %s",username,password);
@@ -266,6 +264,7 @@ void verify_files(int login_substate,int key)
 
     }
 
+///////////////////////////////////////////////////////////
 
     if(login_substate==1)
     {
@@ -273,7 +272,7 @@ void verify_files(int login_substate,int key)
 
         if (key !='\b')
         {
-            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
             username[index_username_login]=key;
             username[index_username_login+1]='\0';
             index_username_login++;
@@ -282,7 +281,7 @@ void verify_files(int login_substate,int key)
         {
             if(index_username_login>=0)
             {
-                PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+                PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
                 username[index_username_login-1]='\0';
                 index_username_login--;
             }
@@ -296,7 +295,7 @@ void verify_files(int login_substate,int key)
     {
         if (key !='\b')
         {
-            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
             password[index_password_login]=key;
             star_password[index_password_login]='*';
             password[index_password_login+1]='\0';
@@ -307,7 +306,7 @@ void verify_files(int login_substate,int key)
         {
             if(index_password_login>=0)
             {
-                PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+                PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
                 star_password[index_password_login-1]='\0';
                 password[index_password_login-1]='\0';
                 index_password_login--;
@@ -323,7 +322,7 @@ void input_files(int cna_substate,int key)
 {
     if(key==13)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         int i;
         for(i=0; i<8; i++)
         {
@@ -352,7 +351,7 @@ void input_files(int cna_substate,int key)
 
         if (key !='\b')
         {
-            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
             username_input[index_username]=key;
             username_input[index_username+1]='\0';
             index_username++;
@@ -374,7 +373,7 @@ void input_files(int cna_substate,int key)
     {
         if (key !='\b')
         {
-            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
             mobile_input[index_mobile]=key;
             mobile_input[index_mobile+1]='\0';
             index_mobile++;
@@ -397,7 +396,7 @@ void input_files(int cna_substate,int key)
 
         if (key !='\b')
         {
-            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
             institution_input[index_institution]=key;
             institution_input[index_institution+1]='\0';
             index_institution++;
@@ -421,7 +420,7 @@ void input_files(int cna_substate,int key)
 
         if (key !='\b')
         {
-            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
             class_input[index_class]=key;
             class_input[index_class+1]='\0';
             index_class++;
@@ -445,7 +444,7 @@ void input_files(int cna_substate,int key)
 
         if (key !='\b')
         {
-            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
             password_input[index_password]=key;
             password_input[index_password+1]='\0';
             index_password++;
@@ -499,7 +498,7 @@ void profile_mouse(int mx,int my)
 {
     if(my>=140 && my<=300 && mx>=120 && mx<=450)
     {
-        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
         gamestate=4;
 
     }
@@ -538,19 +537,19 @@ void ccmouse(int mx,int my)
 {
     if(my>=650 && my<=750 && mx>=00 && mx<=120)
     {
-        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
         gamestate=0;
 
     }
     if(my>=0 && my<=100 && mx>=00 && mx<=120)
     {
-        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\back.wav",NULL, SND_ASYNC);
         showtext=1;
 
     }
     if(mx>=345 && mx<=600 && my>=520 && my<=560)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         cc_substate=1;
     }
     if(mx>=345 && mx<=600 && my>=480 && my<=520)
@@ -560,12 +559,12 @@ void ccmouse(int mx,int my)
     }
     if(mx>=345 && mx<=600 && my>=440 && my<=480)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         cc_substate=3;
     }
     if(mx>=345 && mx<=600 && my>=400 && my<=440)
     {
-        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
         cc_substate=4;
     }
 }
@@ -660,6 +659,10 @@ void iSpecialKeyboard(unsigned char key)
 }
 int main()
 {
+    if(MusicOn)
+    {
+        PlaySound("Sounds\\Puzzle_click_sound.wav",NULL, SND_ASYNC);
+    }
     iInitialize(lenth, width, "CLASSROOM");
 
     return 0;
