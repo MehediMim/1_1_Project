@@ -7,6 +7,9 @@
 // 1 for log in page
 // 2 for cna page
 // 3 for profile homepage
+// 4 for create class
+// 5 for announcement page
+// 6 for profile
 
 /////////////////////////////////// FILE VARIABLES ////////
 FILE *username_input_file=fopen("Files/username_input_file.txt","a+");
@@ -35,20 +38,27 @@ int index_class=0;
 char password_input[100];
 char encrypted_password_input[100];
 int index_password=0;
+
+
+char announcement_input[1000];
+int index_announcement=0;
 ///////////////////////////////// LOG IN VARIABLES ///////
 char username[100];
 int index_username_login=0;
 char password[100];
 int index_password_login=0;
 char star_password[100];
+
+
 //////////////////////////////////////////////////////
-char bc[6][200]= {"Images\\bgone.bmp","Images\\loginpage.bmp","Images\\cnapage.bmp","Images\\homepage.bmp","Images\\ccpage.bmp"};
+char bc[10][200]= {"Images\\bgone.bmp","Images/loginpage.bmp","Images/cnapage.bmp","Images/homepage.bmp","Images/ccpage.bmp","Images/announcement_page.bmp","Images/profile.bmp"};
 
 bool MusicOn=false;
 int gamestate=0;
 int cna_substate=0;
 int cc_substate=0;
 int login_substate=0;
+int announcement_substate=0;
 int l,i;
 int password_matched=0;
 ////////////////////////////////////////////////////////
@@ -57,7 +67,7 @@ void home_mouse(int mx,int my)
     if(my>=300 && my<=550 && mx>=200 && mx<=370)
     {
         PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
-        gamestate=1;
+        gamestate=5;      /////////////////////////////////////// 5 for testing..set it to 1
 
     }
     if(my>=300 && my<=550 && mx>=390 && mx<=550)
@@ -464,6 +474,147 @@ void input_files(int cna_substate,int key)
         }
     }
 }
+void input_in_cc( int cc_substate,int key)
+{
+    if(key==13)
+    {
+        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        username_input[index_username]='\0';
+        fprintf(class_code_file, "%s\n", username_input);
+        fclose(class_code_file);
+        gamestate=5;
+
+    }
+    if(cc_substate==1)
+    {
+
+
+        if (key !='\b')
+        {
+            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            username_input[index_username]=key;
+            username_input[index_username+1]='\0';
+            index_username++;
+        }
+        else
+        {
+            if(index_username>=0)
+            {
+                username_input[index_username-1]='\0';
+                index_username--;
+            }
+            else
+            {
+                index_username=0;
+            }
+        }
+    }
+    if(cc_substate==2)
+    {
+        if (key !='\b')
+        {
+            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            mobile_input[index_mobile]=key;
+            mobile_input[index_mobile+1]='\0';
+            index_mobile++;
+        }
+        else
+        {
+            if(index_mobile>=0)
+            {
+                mobile_input[index_mobile-1]='\0';
+                index_mobile--;
+            }
+            else
+            {
+                index_mobile=0;
+            }
+        }
+    }
+    if(cc_substate==3)
+    {
+
+        if (key !='\b')
+        {
+            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            institution_input[index_institution]=key;
+            institution_input[index_institution+1]='\0';
+            index_institution++;
+        }
+        else
+        {
+            if(index_institution>=0)
+            {
+                institution_input[index_institution-1]='\0';
+                index_institution--;
+            }
+            else
+            {
+                index_institution=0;
+            }
+        }
+    }
+    if(cc_substate==4)
+    {
+
+
+        if (key !='\b')
+        {
+            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            class_input[index_class]=key;
+            class_input[index_class+1]='\0';
+            index_class++;
+        }
+        else
+        {
+            if(index_class>=0)
+            {
+                class_input[index_class-1]='\0';
+                index_class--;
+            }
+            else
+            {
+                index_class=0;
+            }
+        }
+    }
+}
+void input_in_announcement(int announement_substate,int key)
+{
+    if(key==13)
+    {
+        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        username_input[index_username]='\0';
+        fprintf(class_code_file, "%s\n", username_input);
+        fclose(class_code_file);
+        gamestate=5;
+
+    }
+    if(announcement_substate==1)
+    {
+
+
+        if (key !='\b')
+        {
+            PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+            announcement_input[index_announcement]=key;
+            announcement_input[index_announcement+1]='\0';
+            index_announcement++;
+        }
+        else
+        {
+            if(index_announcement>=0)
+            {
+                announcement_input[index_announcement-1]='\0';
+                index_announcement--;
+            }
+            else
+            {
+                index_announcement=0;
+            }
+        }
+    }
+}
 void profile_homepage()
 {
     iShowBMP(0,0,bc[3]);
@@ -495,12 +646,18 @@ void profile_homepage()
 
 
 }
-void profile_mouse(int mx,int my)
+void profile_homepage_mouse(int mx,int my)
 {
     if(my>=140 && my<=300 && mx>=120 && mx<=450)
     {
         PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
         gamestate=4;
+
+    }
+    if(my>=420 && my<=450 && mx>=800 && mx<=1200)
+    {
+        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        gamestate=6;
 
     }
 }
@@ -533,19 +690,22 @@ void ccpage()
         iSetColor(0,163,109);
         iFilledRectangle(348,393,309,34);
     }
+
+    iSetColor(0,0,0);
+    iText(355,525,username_input,GLUT_BITMAP_HELVETICA_18);
+    iSetColor(0,0,0);
+    iText(355,487,mobile_input,GLUT_BITMAP_HELVETICA_18);
+    iSetColor(0,0,0);
+    iText(355,445,institution_input,GLUT_BITMAP_HELVETICA_18);
+    iSetColor(0,0,0);
+    iText(355,403,class_input,GLUT_BITMAP_HELVETICA_18);
 }
 void ccmouse(int mx,int my)
 {
     if(my>=650 && my<=750 && mx>=00 && mx<=120)
     {
         PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
-        gamestate=0;
-
-    }
-    if(my>=0 && my<=100 && mx>=00 && mx<=120)
-    {
-        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
-        showtext=1;
+        gamestate=3;
 
     }
     if(mx>=345 && mx<=600 && my>=520 && my<=560)
@@ -555,7 +715,7 @@ void ccmouse(int mx,int my)
     }
     if(mx>=345 && mx<=600 && my>=480 && my<=520)
     {
-        PlaySound("Sounds\\enter.wav",NULL, SND_ASYNC);
+        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
         cc_substate=2;
     }
     if(mx>=345 && mx<=600 && my>=440 && my<=480)
@@ -568,6 +728,48 @@ void ccmouse(int mx,int my)
         PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
         cc_substate=4;
     }
+}
+void announement_mouse(int mx,int my)
+{
+    if(my>=650 && my<=750 && mx>=00 && mx<=120)
+    {
+        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        gamestate=3;
+
+    }
+    else if(my>=50 && my<=700 && mx>=00 && mx<=520)
+    {
+        PlaySound("Sounds/enter.wav",NULL, SND_ASYNC);
+        announcement_substate=1;
+
+    }
+}
+void announcement_page()
+{
+    //strcpy(username_input,"HEllo");
+    iShowBMP(0,0,bc[5]);
+    iSetColor(255,255,255);
+    iText(100,430,announcement_input,GLUT_BITMAP_HELVETICA_18);
+    iSetColor(255,255,255);
+    iText(1020,500,username_input,GLUT_BITMAP_HELVETICA_18);
+}
+void profile()
+{
+    iShowBMP(0,0,bc[6]);
+    iSetColor(255,255,255);
+    iText(100,430,announcement_input,GLUT_BITMAP_HELVETICA_18);
+    iSetColor(255,255,255);
+    iText(1020,500,username_input,GLUT_BITMAP_HELVETICA_18);
+}
+void profile_mouse(int mx,int my)
+{
+    if(my>=650 && my<=750 && mx>=00 && mx<=120)
+    {
+        PlaySound("Sounds/back.wav",NULL, SND_ASYNC);
+        gamestate=3;
+
+    }
+
 }
 void iDraw()
 {
@@ -589,8 +791,17 @@ void iDraw()
     {
         profile_homepage();
     }
-    if(gamestate==4){
+    if(gamestate==4)
+    {
         ccpage();
+    }
+    if(gamestate==5)
+    {
+        announcement_page();
+    }
+    if(gamestate==6)
+    {
+        profile();
     }
 
 }
@@ -619,11 +830,19 @@ void iMouse(int button, int state, int mx, int my)
         }
         if(gamestate==3)
         {
-            profile_mouse(mx,my);
+            profile_homepage_mouse(mx,my);
         }
         if(gamestate==4)
         {
             ccmouse(mx,my);
+        }
+        if(gamestate==5)
+        {
+            announement_mouse(mx,my);
+        }
+        if(gamestate==6)
+        {
+            profile_mouse(mx,my);
         }
 
 
@@ -640,6 +859,14 @@ void iKeyboard(unsigned char key)
     if(gamestate==1)
     {
         verify_files(login_substate,key);
+    }
+    if(gamestate==4)
+    {
+        input_in_cc(cc_substate,key);
+    }
+    if(gamestate==5)
+    {
+        input_in_announcement(announcement_substate,key);
     }
 
 }
